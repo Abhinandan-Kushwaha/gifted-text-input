@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderWidth: 1,
     borderColor: '#ccc',
-    minWidth: 340,
+    minWidth: 360,
     maxWidth: SCREEN_WIDTH - 40,
 
     // elevation / shadow

@@ -1,6 +1,17 @@
 ## Gifted Text Input
 
-A text input component for react native which allows styling-
+A <i>rich and elegant</i> text input component for react native.
+
+### Reasons to use-
+
+Primarily because `<TextInput>` from react-native has very limited styling options.<br />
+`<GiftedTextInput>` is rich in styling and features, and also-
+
+- Light weight and easily pluggable
+- No external dependencies
+- Built-in editor component for Instagram-story like text editing
+
+### Styling props-
 
 - color
 - background color
@@ -8,10 +19,7 @@ A text input component for react native which allows styling-
 - font size
 - bold, itaic, underline, strike-through
 - text aignment
+- border styles
+- paddings
+- placeholder styles
 - animations (todo)
-
-### Reasons to use-
-
-- Light weight and easily pluggable
-- No external dependencies
-- In-built editor component for Instagram-story like text editing
