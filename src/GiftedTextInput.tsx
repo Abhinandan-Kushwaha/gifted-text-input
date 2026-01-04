@@ -11,6 +11,10 @@ type TextAlignType =
   | undefined;
 
 interface IGiftedTextInputProps {
+  value?: string;
+  onChangeText?: (v: string) => void;
+  onBlur?: () => void;
+  autoFocus?: boolean;
   fontSize?: number;
   color?: string;
   backgroundColor?: string;
@@ -40,8 +44,12 @@ interface IGiftedTextInputProps {
   placeholderTextColor?: string;
 }
 
-const GiftedTextInput = (props: IGiftedTextInputProps) => {
+export const GiftedTextInput = (props: IGiftedTextInputProps) => {
   const {
+    value = '',
+    onChangeText,
+    onBlur,
+    autoFocus = false,
     fontSize: propsFontSize = 12,
     color: propsColor = 'black',
     backgroundColor: propsBackgroundColor = 'transparent',
@@ -70,7 +78,7 @@ const GiftedTextInput = (props: IGiftedTextInputProps) => {
     placeholder = '',
     placeholderTextColor = 'gray',
   } = props;
-  const [text, setText] = useState('');
+  const [text, setText] = useState(value);
   const [color, setColor] = useState(propsColor);
   const [backgroundColor, setBackgroundColor] = useState(propsBackgroundColor);
   const [font, setFont] = useState('');
@@ -82,6 +90,7 @@ const GiftedTextInput = (props: IGiftedTextInputProps) => {
   const [isStrikeThrough, setIsStrikeThrough] = useState(false);
   const selection = { start: text.length, end: text.length }; // to disable caret movement
   const handleChangeText = (val: string) => {
+    onChangeText?.(val);
     setText(val);
   };
   const [isFormattingBoxVisible, setIsFormattingBoxVisible] = useState(false);
@@ -90,9 +99,11 @@ const GiftedTextInput = (props: IGiftedTextInputProps) => {
     <>
       <View>
         <TextInput
-          autoFocus
+          value={text}
+          autoFocus={autoFocus}
           multiline
           onChangeText={handleChangeText}
+          onBlur={onBlur}
           style={{ position: 'absolute', fontSize, opacity: 0 }}
           selection={selection}
           onSelectionChange={() => {}}
@@ -167,5 +178,3 @@ const GiftedTextInput = (props: IGiftedTextInputProps) => {
     </>
   );
 };
-
-export default GiftedTextInput;

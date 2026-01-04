@@ -10,7 +10,7 @@ export const FontSizeGrid = (props: IFontProps) => {
   const { fontSize, setFontSize } = props;
   return (
     <View style={styles.marginTop20}>
-      <Text style={styles.textSizeLabel}>Text Size:</Text>
+      <Text style={styles.textSizeLabel}>Text Size</Text>
       <View style={[styles.container, styles.border]}>
         {fontSizes.map(item => {
           return (

@@ -1,5 +1,6 @@
+import React from 'react';
 import { View } from 'react-native';
-import GiftedTextInput from './src/GiftedTextInput';
+import { GiftedTextInput } from './src/GiftedTextInput';
 
 // A simple demo of the library-
 
