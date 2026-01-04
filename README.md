@@ -11,6 +11,10 @@ Primarily because `<TextInput>` from react-native has very limited styling optio
 - No external dependencies
 - Built-in editor component for Instagram-story like text editing
 
+
+https://github.com/user-attachments/assets/ea3f3de0-dd12-417e-bad3-1f0300641be9
+
+
 ### Styling props-
 
 - color
@@ -18,7 +22,7 @@ Primarily because `<TextInput>` from react-native has very limited styling optio
 - font family
 - font size
 - bold, itaic, underline, strike-through
-- text aignment
+- text alignment
 - border styles
 - paddings
 - placeholder styles
