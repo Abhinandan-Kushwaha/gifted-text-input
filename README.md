@@ -22,7 +22,7 @@ https://github.com/user-attachments/assets/ea3f3de0-dd12-417e-bad3-1f0300641be9
 - font family
 - font size
 - bold, itaic, underline, strike-through
-- text aignment
+- text alignment
 - border styles
 - paddings
 - placeholder styles
