@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
 export function PaletteIcon({ size = 64, color = '#000' }) {

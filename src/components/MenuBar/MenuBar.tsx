@@ -1,5 +1,6 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { PaletteIcon } from '../PaletteIcon/PaletteIcon';
+import { TextAlignType } from '../../types';
 
 interface TopRightCornerCrossProps {
   onFontPress: () => void;
@@ -24,8 +25,8 @@ interface TopRightCornerCrossProps {
   setIsColorBoxOpen: (v: boolean) => void;
   isBackgroundColorBoxOpen: boolean;
   setIsBackgroundColorBoxOpen: (v: boolean) => void;
-  align: string;
-  setAlign: (align: string) => void;
+  align: TextAlignType;
+  setAlign: (align: TextAlignType) => void;
 }
 
 export const MenuBar = (props: TopRightCornerCrossProps) => {
@@ -123,7 +124,7 @@ export const MenuBar = (props: TopRightCornerCrossProps) => {
         onPress={handleColorBoxPress}
         style={[styles.button, isColorBoxOpen && styles.selected]}
       >
-        <PaletteIcon size={26} color={color}/>
+        <PaletteIcon size={26} color={color} />
       </TouchableOpacity>
       <TouchableOpacity
         hitSlop={12}

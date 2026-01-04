@@ -5,6 +5,7 @@ import { TopRightCornerCross } from '../TopRightCornerCross/TopRightCornerCross'
 import { MenuBar } from '../MenuBar/MenuBar';
 import { FontsGrid } from '../Grid/FontsGrid';
 import { FontSizeGrid } from '../Grid/FontSizeGrid';
+import { TextAlignType } from '../../types';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -17,8 +18,8 @@ type FloatingBoxProps = {
   setFont: (font: string) => void;
   fontSize: number;
   setFontSize: (fontSize: number) => void;
-  align: string;
-  setAlign: (align: string) => void;
+  align: TextAlignType;
+  setAlign: (align: TextAlignType) => void;
   onCancel: () => void;
   initialX?: number;
   initialY?: number;
@@ -65,7 +66,8 @@ export const FloatingBox: React.FC<FloatingBoxProps> = ({
 
   const [isFontFamilyOpen, setIsFontFamilyOpen] = useState(false);
   const [isColorBoxOpen, setIsColorBoxOpen] = useState(false);
-  const [isBackgroundColorBoxOpen, setIsBackgroundColorBoxOpen] = useState(false);
+  const [isBackgroundColorBoxOpen, setIsBackgroundColorBoxOpen] =
+    useState(false);
 
   const panResponder = useRef(
     PanResponder.create({
@@ -154,14 +156,13 @@ export const FloatingBox: React.FC<FloatingBoxProps> = ({
           setSelectedPos={setSelectedPos}
           applyColor={setColor}
         />
-      ) : isBackgroundColorBoxOpen ? 
-      <ColorGrid
+      ) : isBackgroundColorBoxOpen ? (
+        <ColorGrid
           selectedPos={selectedPos}
           setSelectedPos={setSelectedPos}
           applyColor={setBackgroundColor}
         />
-        :
-      (
+      ) : (
         <FontSizeGrid fontSize={fontSize} setFontSize={setFontSize} />
       )}
       <TopRightCornerCross

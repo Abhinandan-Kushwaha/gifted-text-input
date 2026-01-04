@@ -12,7 +12,7 @@ function App() {
         padding={4}
         paddingHorizontal={12}
         placeholder="Enter here"
-        borderWidth={1}
+        // borderWidth={1}
         borderColor="green"
         borderTopLeftRadius={10}
         borderBottomRightRadius={10}
