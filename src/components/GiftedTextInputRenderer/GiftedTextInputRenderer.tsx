@@ -1,4 +1,4 @@
-import { TextInput, Text, View, Modal } from 'react-native';
+import { TextInput, Text, View, Modal, Pressable } from 'react-native';
 import { FloatingBox } from '../FloatingBox/FloatingBox';
 import { TextAlignType, IGiftedTextInputRendererProps } from '../../types';
 
@@ -127,27 +127,38 @@ export const GiftedTextInputRenderer = (
         animationType="fade"
         onRequestClose={onCancel} // Android back button
       >
-        <FloatingBox
-          onCancel={onCancel}
-          color={color}
-          setColor={setColor}
-          backgroundColor={backgroundColor}
-          setBackgroundColor={setBackgroundColor}
-          font={font}
-          setFont={setFont}
-          fontSize={fontSize}
-          setFontSize={setFontSize}
-          align={align}
-          setAlign={setAlign}
-          isBold={isBold}
-          isItalic={isItalic}
-          isUnderline={isUnderline}
-          isStrikeThrough={isStrikeThrough}
-          setIsBold={setIsBold}
-          setIsItalic={setIsItalic}
-          setIsUnderline={setIsUnderline}
-          setIsStrikeThrough={setIsStrikeThrough}
-        />
+        {/* Backdrop */}
+        <Pressable
+          style={{
+            flex: 1,
+            backgroundColor: 'rgba(0,0,0,0.3)',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          onPress={onCancel}
+        >
+          <FloatingBox
+            onCancel={onCancel}
+            color={color}
+            setColor={setColor}
+            backgroundColor={backgroundColor}
+            setBackgroundColor={setBackgroundColor}
+            font={font}
+            setFont={setFont}
+            fontSize={fontSize}
+            setFontSize={setFontSize}
+            align={align}
+            setAlign={setAlign}
+            isBold={isBold}
+            isItalic={isItalic}
+            isUnderline={isUnderline}
+            isStrikeThrough={isStrikeThrough}
+            setIsBold={setIsBold}
+            setIsItalic={setIsItalic}
+            setIsUnderline={setIsUnderline}
+            setIsStrikeThrough={setIsStrikeThrough}
+          />
+        </Pressable>
       </Modal>
     </>
   );
