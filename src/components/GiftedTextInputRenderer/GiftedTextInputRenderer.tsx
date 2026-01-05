@@ -131,7 +131,7 @@ export const GiftedTextInputRenderer = (
         <Pressable
           style={{
             flex: 1,
-            backgroundColor: 'rgba(0,0,0,0.3)',
+            backgroundColor: 'rgba(0,0,0,0.1)',
             justifyContent: 'center',
             alignItems: 'center',
           }}
