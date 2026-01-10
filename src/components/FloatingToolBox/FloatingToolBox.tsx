@@ -34,7 +34,7 @@ type FloatingBoxProps = {
   setIsStrikeThrough: (v: boolean) => void;
 };
 
-export const FloatingBox: React.FC<FloatingBoxProps> = ({
+export const FloatingToolBox: React.FC<FloatingBoxProps> = ({
   initialX = 20,
   initialY = 180,
   color,

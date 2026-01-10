@@ -13,7 +13,6 @@ export type GiftedTextInputState = {
   isItalic: boolean;
   isUnderline: boolean;
   isStrikeThrough: boolean;
-  isFormattingBoxVisible: boolean;
 };
 
 export const giftedTextInputReducer = (
@@ -50,9 +49,6 @@ export const giftedTextInputReducer = (
 
     case 'TOGGLE_STRIKE':
       return { ...state, isStrikeThrough: !state.isStrikeThrough };
-
-    case 'SET_IS_FORMATTING_BOX_VISIBLE':
-      return { ...state, isFormattingBoxVisible: action.payload };
 
     default:
       return state;

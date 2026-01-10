@@ -14,5 +14,5 @@ export const GiftedTextInput = forwardRef<
     focus: () => gifted.textInputRef.current?.focus(),
   }));
 
-  return <GiftedTextInputRenderer {...gifted} />;
+  return <GiftedTextInputRenderer {...gifted} {...props} />;
 });

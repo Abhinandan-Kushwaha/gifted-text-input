@@ -19,6 +19,7 @@ export interface IGiftedTextInputProps {
   ref?: RefObject<TextInput | null>;
   value?: string;
   onChangeText?: (v: string) => void;
+  onLongPress?: () => void;
   onBlur?: () => void;
   autoFocus?: boolean;
   fontSize?: number;
@@ -30,7 +31,6 @@ export interface IGiftedTextInputProps {
   isItalic?: boolean;
   isUnderline?: boolean;
   isStrikeThrough?: boolean;
-  isFormattingBoxVisible?: boolean;
   padding?: number;
   paddingHorizontal?: number;
   paddingVertical?: number;
@@ -76,7 +76,6 @@ export interface IGiftedTextInputRendererProps {
   isItalic: boolean;
   isUnderline: boolean;
   isStrikeThrough: boolean;
-  isFormattingBoxVisible: boolean;
 
   paddingLeft: number;
   paddingRight: number;
@@ -103,6 +102,7 @@ export interface IGiftedTextInputRendererProps {
   autoFocus: boolean;
 
   /** handlers */
+  onLongPress?: () => void;
   onBlur?: () => void;
 
   /** actions */
@@ -116,6 +116,5 @@ export interface IGiftedTextInputRendererProps {
   setIsItalic: () => void;
   setIsUnderline: () => void;
   setIsStrikeThrough: () => void;
-  setIsFormattingBoxVisible: (val: boolean) => void;
   onChangeText?: (val: string) => void;
 }

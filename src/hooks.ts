@@ -13,6 +13,7 @@ export const useGiftedTextInput = (
   const {
     ref,
     value = '',
+    onLongPress,
     onBlur,
     autoFocus = false,
     fontSize = 12,
@@ -24,7 +25,6 @@ export const useGiftedTextInput = (
     isItalic = false,
     isUnderline = false,
     isStrikeThrough = false,
-    isFormattingBoxVisible = false,
     padding,
     paddingVertical,
     paddingHorizontal,
@@ -65,7 +65,6 @@ export const useGiftedTextInput = (
     isItalic,
     isUnderline,
     isStrikeThrough,
-    isFormattingBoxVisible,
   });
 
   const properties = {
@@ -123,12 +122,9 @@ export const useGiftedTextInput = (
     dispatch({ type: 'TOGGLE_STRIKE' });
   };
 
-  const setIsFormattingBoxVisible = (val: boolean) => {
-    dispatch({ type: 'SET_IS_FORMATTING_BOX_VISIBLE', payload: val });
-  };
-
   return {
     state,
+    onLongPress,
     onBlur,
     ...properties,
     setText,
@@ -141,7 +137,6 @@ export const useGiftedTextInput = (
     setIsItalic,
     setIsUnderline,
     setIsStrikeThrough,
-    setIsFormattingBoxVisible,
     onChangeText,
   };
 };
