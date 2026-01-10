@@ -35,8 +35,8 @@ type FloatingBoxProps = {
 };
 
 export const FloatingToolBox: React.FC<FloatingBoxProps> = ({
-  initialX = 20,
-  initialY = 180,
+  initialX = 4,
+  initialY = 20,
   color,
   setColor,
   backgroundColor,

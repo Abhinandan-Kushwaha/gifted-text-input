@@ -1,5 +1,8 @@
 import { TextInput, Text, View } from 'react-native';
 import { TextAlignType, IGiftedTextInputRendererProps } from '../../types';
+import { useRef } from 'react';
+
+const LONG_PRESS_MS = 600;
 
 export const GiftedTextInputRenderer = (
   props: IGiftedTextInputRendererProps,
@@ -46,6 +49,8 @@ export const GiftedTextInputRenderer = (
     props.onChangeText?.(val);
     setText(val);
   };
+  const pressedRef = useRef(false);
+  const longPressTimer = useRef<NodeJS.Timeout | null>(null);
 
   return (
     <View>
@@ -61,48 +66,77 @@ export const GiftedTextInputRenderer = (
         onSelectionChange={() => {}}
         selectionColor={'transparent'} // to hide selector
       />
-      <Text
-        onPress={() => {
-          textInputRef.current?.focus();
+      <View
+        onTouchStart={() => {
+          if (!onLongPress) return;
+          pressedRef.current = true;
+
+          longPressTimer.current = setTimeout(() => {
+            if (pressedRef.current) {
+              onLongPress?.();
+            }
+          }, LONG_PRESS_MS);
         }}
-        onLongPress={onLongPress}
-        style={{
-          backgroundColor,
-          position: 'absolute',
-          color: text ? color : placeholderTextColor,
-          fontSize,
-          fontWeight: isBold ? 'bold' : 'normal',
-          fontStyle: isItalic ? 'italic' : 'normal',
-          fontFamily: font,
-          textAlign: align as TextAlignType,
-          textDecorationLine:
-            isUnderline && isStrikeThrough
-              ? 'underline line-through'
-              : isUnderline
-              ? 'underline'
-              : isStrikeThrough
-              ? 'line-through'
-              : 'none',
-          paddingLeft,
-          paddingRight,
-          paddingTop,
-          paddingBottom,
-          borderTopWidth,
-          borderBottomWidth,
-          borderLeftWidth,
-          borderRightWidth,
-          borderTopColor,
-          borderBottomColor,
-          borderLeftColor,
-          borderRightColor,
-          borderTopLeftRadius,
-          borderTopRightRadius,
-          borderBottomLeftRadius,
-          borderBottomRightRadius,
+        onTouchEnd={() => {
+          if (!onLongPress) return;
+          pressedRef.current = false;
+          if (longPressTimer.current) {
+            clearTimeout(longPressTimer.current);
+          }
+        }}
+        onTouchCancel={() => {
+          if (!onLongPress) return;
+          // OnePlus often fires this incorrectly
+          // DO NOT assume finger lifted
+          pressedRef.current = false;
+          if (longPressTimer.current) {
+            clearTimeout(longPressTimer.current);
+          }
         }}
       >
-        {text || placeholder}
-      </Text>
+        <Text
+          onPress={() => {
+            textInputRef.current?.focus();
+          }}
+          onLongPress={onLongPress}
+          style={{
+            backgroundColor,
+            position: 'absolute',
+            color: text ? color : placeholderTextColor,
+            fontSize,
+            fontWeight: isBold ? 'bold' : 'normal',
+            fontStyle: isItalic ? 'italic' : 'normal',
+            fontFamily: font,
+            textAlign: align as TextAlignType,
+            textDecorationLine:
+              isUnderline && isStrikeThrough
+                ? 'underline line-through'
+                : isUnderline
+                ? 'underline'
+                : isStrikeThrough
+                ? 'line-through'
+                : 'none',
+            paddingLeft,
+            paddingRight,
+            paddingTop,
+            paddingBottom,
+            borderTopWidth,
+            borderBottomWidth,
+            borderLeftWidth,
+            borderRightWidth,
+            borderTopColor,
+            borderBottomColor,
+            borderLeftColor,
+            borderRightColor,
+            borderTopLeftRadius,
+            borderTopRightRadius,
+            borderBottomLeftRadius,
+            borderBottomRightRadius,
+          }}
+        >
+          {text || placeholder}
+        </Text>
+      </View>
     </View>
   );
 };

@@ -3,11 +3,11 @@ import { Modal, Pressable } from 'react-native';
 interface IFloatingBoxModalProps {
   isFormattingBoxVisible: boolean;
   onCancel: () => void;
-  BoxComponent: any;
+  ToolBoxComponent: any;
 }
 
 export const FloatingToolBoxModal = (props: IFloatingBoxModalProps) => {
-  const { isFormattingBoxVisible, onCancel, BoxComponent } = props;
+  const { isFormattingBoxVisible, onCancel, ToolBoxComponent } = props;
   return (
     <Modal
       visible={isFormattingBoxVisible}
@@ -25,7 +25,7 @@ export const FloatingToolBoxModal = (props: IFloatingBoxModalProps) => {
         }}
         onPress={onCancel}
       >
-        <BoxComponent />
+        <ToolBoxComponent />
       </Pressable>
     </Modal>
   );
