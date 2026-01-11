@@ -1,11 +1,13 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { colorCodes } from './colorCodes';
 import React from 'react';
+import { DiagonalLine } from '../Icons/DiagonalLine';
 
 interface ColorGridProps {
   setColor?: (c: string) => void;
-  selectedPos: number[];
-  setSelectedPos: (pos: number[]) => void;
+  selectedColor: string;
+  // selectedPos: number[];
+  // setSelectedPos: (pos: number[]) => void;
   applyColor?: (color: string) => void;
 }
 
@@ -17,11 +19,18 @@ const isLightColor = (r: number, c: number) => {
 };
 
 export const ColorGrid = React.memo((props: ColorGridProps) => {
-  const { selectedPos, setSelectedPos, applyColor } = props;
+  const { selectedColor, applyColor } = props;
+
+  const selectedRow: number = Math.max(
+    0,
+    colorCodes.findIndex(item => item.includes(selectedColor)),
+  );
+  const selectedCol =
+    colorCodes[selectedRow]?.findIndex(val => val === selectedColor) ?? 0;
 
   const onPress = (color: string, r: number, c: number) => {
     console.log(color, r, c);
-    setSelectedPos([r, c]);
+    // setSelectedPos([r, c]);
     const selectedColor = colorCodes[r][c];
 
     applyColor?.(selectedColor);
@@ -29,14 +38,12 @@ export const ColorGrid = React.memo((props: ColorGridProps) => {
   return (
     <>
       <View style={[styles.row, styles.alignCenter]}>
-        <Text style={styles.colorCodeText}>
-          {colorCodes[selectedPos[0]][selectedPos[1]]}
-        </Text>
+        <Text style={styles.colorCodeText}>{selectedColor}</Text>
         <View
           style={[
             styles.singleBox,
             styles.border,
-            { backgroundColor: colorCodes[selectedPos[0]][selectedPos[1]] },
+            { backgroundColor: selectedColor },
           ]}
         />
       </View>
@@ -51,14 +58,18 @@ export const ColorGrid = React.memo((props: ColorGridProps) => {
                     activeOpacity={0.8}
                     onPress={() => onPress(color, r, c)}
                     style={[
-                      selectedPos[0] === r && selectedPos[1] === c
+                      selectedRow === r && selectedCol === c
                         ? isLightColor(r, c)
                           ? styles.selectedBoxLight
                           : styles.selectedBox
                         : styles.box,
                       { backgroundColor: color },
                     ]}
-                  ></TouchableOpacity>
+                  >
+                    {color === 'transparent' ? (
+                      <DiagonalLine color="lightgray" />
+                    ) : null}
+                  </TouchableOpacity>
                 );
               })}
             </View>
@@ -78,6 +89,8 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 20,
     overflow: 'hidden',
+    width: 325, // 36 * 9 + 1
+    alignSelf: 'center',
   },
   colorCodeText: {
     color: 'gray',

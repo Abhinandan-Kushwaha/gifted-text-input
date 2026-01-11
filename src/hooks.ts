@@ -50,6 +50,10 @@ export const useGiftedTextInput = (
     placeholder = '',
     placeholderTextColor = 'gray',
     onChangeText,
+    isFontOptionsOpen = false,
+    isColorBoxOpen = false,
+    isBackgroundColorBoxOpen = false,
+    isRulerOptionsOpen = false,
   } = props;
   const textInputRef = ref ?? useRef<TextInput | null>(null);
 
@@ -65,15 +69,29 @@ export const useGiftedTextInput = (
     isItalic,
     isUnderline,
     isStrikeThrough,
+    paddingHorizontal: paddingHorizontal ?? padding ?? 0,
+    paddingVertical: paddingVertical ?? padding ?? 0,
+    borderRadius: borderRadius ?? 0,
+    paddingTop: paddingTop ?? paddingVertical ?? padding ?? 0,
+    paddingRight: paddingRight ?? paddingHorizontal ?? padding ?? 0,
+    paddingBottom: paddingBottom ?? paddingVertical ?? padding ?? 0,
+    paddingLeft: paddingLeft ?? paddingHorizontal ?? padding ?? 0,
+    borderTopLeftRadius: borderTopLeftRadius ?? borderRadius ?? 0,
+    borderTopRightRadius: borderTopRightRadius ?? borderRadius ?? 0,
+    borderBottomLeftRadius: borderBottomLeftRadius ?? borderRadius ?? 0,
+    borderBottomRightRadius: borderBottomRightRadius ?? borderRadius ?? 0,
+    isFontOptionsOpen,
+    isColorBoxOpen,
+    isBackgroundColorBoxOpen,
+    isRulerOptionsOpen,
   });
 
   const properties = {
     textInputRef,
-    ...state,
-    paddingLeft: paddingLeft ?? paddingHorizontal ?? padding ?? 0,
-    paddingRight: paddingRight ?? paddingHorizontal ?? padding ?? 0,
-    paddingTop: paddingTop ?? paddingVertical ?? padding ?? 0,
-    paddingBottom: paddingBottom ?? paddingVertical ?? padding ?? 0,
+    // paddingLeft: paddingLeft ?? paddingHorizontal ?? padding ?? 0,
+    // paddingRight: paddingRight ?? paddingHorizontal ?? padding ?? 0,
+    // paddingTop: paddingTop ?? paddingVertical ?? padding ?? 0,
+    // paddingBottom: paddingBottom ?? paddingVertical ?? padding ?? 0,
     borderTopWidth: borderTopWidth ?? borderWidth ?? 0,
     borderBottomWidth: borderBottomWidth ?? borderWidth ?? 0,
     borderLeftWidth: borderLeftWidth ?? borderWidth ?? 0,
@@ -82,13 +100,14 @@ export const useGiftedTextInput = (
     borderBottomColor: borderBottomColor ?? borderColor ?? '',
     borderLeftColor: borderLeftColor ?? borderColor ?? '',
     borderRightColor: borderRightColor ?? borderColor ?? '',
-    borderTopLeftRadius: borderTopLeftRadius ?? borderRadius ?? 0,
-    borderTopRightRadius: borderTopRightRadius ?? borderRadius ?? 0,
-    borderBottomLeftRadius: borderBottomLeftRadius ?? borderRadius ?? 0,
-    borderBottomRightRadius: borderBottomRightRadius ?? borderRadius ?? 0,
+    // borderTopLeftRadius: borderTopLeftRadius ?? borderRadius ?? 0,
+    // borderTopRightRadius: borderTopRightRadius ?? borderRadius ?? 0,
+    // borderBottomLeftRadius: borderBottomLeftRadius ?? borderRadius ?? 0,
+    // borderBottomRightRadius: borderBottomRightRadius ?? borderRadius ?? 0,
     placeholder,
     placeholderTextColor,
     autoFocus,
+    ...state,
   };
 
   const setText = (val: string) => {
@@ -121,6 +140,27 @@ export const useGiftedTextInput = (
   const setIsStrikeThrough = () => {
     dispatch({ type: 'TOGGLE_STRIKE' });
   };
+  const setPaddingHorizontal = (val: number) => {
+    dispatch({ type: 'SET_PADDING_HORIZONTAL', payload: val });
+  };
+  const setPaddingVertical = (val: number) => {
+    dispatch({ type: 'SET_PADDING_VERTICAL', payload: val });
+  };
+  const setBorderRadius = (val: number) => {
+    dispatch({ type: 'SET_BORDER_RADIUS', payload: val });
+  };
+  const setIsFontOptionsOpen = (val: boolean) => {
+    dispatch({ type: 'SET_IS_FONT_OPTIONS_OPEN', payload: val });
+  };
+  const setIsColorBoxOpen = (val: boolean) => {
+    dispatch({ type: 'SET_IS_COLOR_BOX_OPEN', payload: val });
+  };
+  const setIsBackgroundColorBoxOpen = (val: boolean) => {
+    dispatch({ type: 'SET_IS_BACKGROUND_COLOR_BOX_OPEN', payload: val });
+  };
+  const setIsRulerOptionsOpen = (val: boolean) => {
+    dispatch({ type: 'SET_IS_RULER_OPTIONS_OPEN', payload: val });
+  };
 
   return {
     state,
@@ -138,5 +178,12 @@ export const useGiftedTextInput = (
     setIsUnderline,
     setIsStrikeThrough,
     onChangeText,
+    setPaddingHorizontal,
+    setPaddingVertical,
+    setBorderRadius,
+    setIsFontOptionsOpen,
+    setIsColorBoxOpen,
+    setIsBackgroundColorBoxOpen,
+    setIsRulerOptionsOpen
   };
 };

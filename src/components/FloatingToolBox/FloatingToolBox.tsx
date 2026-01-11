@@ -6,6 +6,7 @@ import { MenuBar } from '../MenuBar/MenuBar';
 import { FontsGrid } from '../Grid/FontsGrid';
 import { FontSizeGrid } from '../Grid/FontSizeGrid';
 import { TextAlignType } from '../../types';
+import { RulersGrid } from '../Grid/RulersGrid';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -27,11 +28,25 @@ type FloatingBoxProps = {
   isItalic: boolean;
   isUnderline: boolean;
   isStrikeThrough: boolean;
+  paddingHorizontal: number;
+  paddingVertical: number;
+  borderRadius: number;
 
+  setPaddingHorizontal: (p: number) => void;
+  setPaddingVertical: (p: number) => void;
+  setBorderRadius: (r: number) => void;
   setIsBold: (v: boolean) => void;
   setIsItalic: (v: boolean) => void;
   setIsUnderline: (v: boolean) => void;
   setIsStrikeThrough: (v: boolean) => void;
+  isFontOptionsOpen: boolean;
+  isColorBoxOpen: boolean;
+  isBackgroundColorBoxOpen: boolean;
+  isRulerOptionsOpen: boolean;
+  setIsFontOptionsOpen: (v: boolean) => void;
+  setIsColorBoxOpen: (v: boolean) => void;
+  setIsBackgroundColorBoxOpen: (v: boolean) => void;
+  setIsRulerOptionsOpen: (v: boolean) => void;
 };
 
 export const FloatingToolBox: React.FC<FloatingBoxProps> = ({
@@ -56,6 +71,20 @@ export const FloatingToolBox: React.FC<FloatingBoxProps> = ({
   setIsItalic,
   setIsUnderline,
   setIsStrikeThrough,
+  paddingHorizontal,
+  paddingVertical,
+  borderRadius,
+  setPaddingHorizontal,
+  setPaddingVertical,
+  setBorderRadius,
+  isFontOptionsOpen,
+  isColorBoxOpen,
+  isBackgroundColorBoxOpen,
+  isRulerOptionsOpen,
+  setIsFontOptionsOpen,
+  setIsColorBoxOpen,
+  setIsBackgroundColorBoxOpen,
+  setIsRulerOptionsOpen,
 }) => {
   const translateX = useRef(new Animated.Value(initialX)).current;
   const translateY = useRef(new Animated.Value(initialY)).current;
@@ -64,10 +93,11 @@ export const FloatingToolBox: React.FC<FloatingBoxProps> = ({
 
   const [size, setSize] = useState({ width: 0, height: 0 });
 
-  const [isFontFamilyOpen, setIsFontFamilyOpen] = useState(false);
-  const [isColorBoxOpen, setIsColorBoxOpen] = useState(false);
-  const [isBackgroundColorBoxOpen, setIsBackgroundColorBoxOpen] =
-    useState(false);
+  // const [isFontOptionsOpen, setIsFontOptionsOpen] = useState(false);
+  // const [isColorBoxOpen, setIsColorBoxOpen] = useState(false);
+  // const [isBackgroundColorBoxOpen, setIsBackgroundColorBoxOpen] =
+  //   useState(false);
+  // const [isRulerOptionsOpen, setIsRulerOptionsOpen] = useState(false);
 
   const panResponder = useRef(
     PanResponder.create({
@@ -110,7 +140,7 @@ export const FloatingToolBox: React.FC<FloatingBoxProps> = ({
       },
     }),
   ).current;
-  const [selectedPos, setSelectedPos] = useState([0, 8]);
+  // const [selectedPos, setSelectedPos] = useState([0, 8]);
 
   return (
     <Animated.View
@@ -138,8 +168,10 @@ export const FloatingToolBox: React.FC<FloatingBoxProps> = ({
         setIsItalic={setIsItalic}
         setIsUnderline={setIsUnderline}
         setIsStrikeThrough={setIsStrikeThrough}
-        isFontFamilyOpen={isFontFamilyOpen}
-        setIsFontFamilyOpen={setIsFontFamilyOpen}
+        isFontOptionsOpen={isFontOptionsOpen}
+        setIsFontOptionsOpen={setIsFontOptionsOpen}
+        isRulerOptionsOpen={isRulerOptionsOpen}
+        setIsRulerOptionsOpen={setIsRulerOptionsOpen}
         isColorBoxOpen={isColorBoxOpen}
         setIsColorBoxOpen={setIsColorBoxOpen}
         isBackgroundColorBoxOpen={isBackgroundColorBoxOpen}
@@ -149,26 +181,37 @@ export const FloatingToolBox: React.FC<FloatingBoxProps> = ({
         backgroundColor={backgroundColor}
         setBackgroundColor={setBackgroundColor}
       />
-      {isFontFamilyOpen && <FontsGrid font={font} setFont={setFont} />}
+      {isFontOptionsOpen && <FontsGrid font={font} setFont={setFont} />}
       {isColorBoxOpen ? (
         <ColorGrid
-          selectedPos={selectedPos}
-          setSelectedPos={setSelectedPos}
+          // selectedPos={selectedPos}
+          // setSelectedPos={setSelectedPos}
+          selectedColor={color}
           applyColor={setColor}
         />
       ) : isBackgroundColorBoxOpen ? (
         <ColorGrid
-          selectedPos={selectedPos}
-          setSelectedPos={setSelectedPos}
+          // selectedPos={selectedPos}
+          // setSelectedPos={setSelectedPos}
+          selectedColor={backgroundColor}
           applyColor={setBackgroundColor}
+        />
+      ) : isRulerOptionsOpen ? (
+        <RulersGrid
+          horizontalPadding={paddingHorizontal ?? 0}
+          setHorizontalPadding={setPaddingHorizontal}
+          verticalPadding={paddingVertical ?? 0}
+          setVerticalPadding={setPaddingVertical}
+          borderRadius={borderRadius ?? 0}
+          setBorderRadius={setBorderRadius}
         />
       ) : (
         <FontSizeGrid fontSize={fontSize} setFontSize={setFontSize} />
       )}
       <TopRightCornerCross
         onPress={onCancel}
-        top={-10}
-        right={-12}
+        top={-16}
+        right={-8}
         paddingHorizontal={7}
       />
     </Animated.View>
@@ -179,14 +222,14 @@ const styles = StyleSheet.create({
   toolbar: {
     position: 'absolute',
     // flexDirection: 'row',
-    paddingHorizontal: 12,
+    paddingHorizontal: 8,
     paddingVertical: 12,
     // borderRadius: 999,
     backgroundColor: 'white',
     borderWidth: 1,
     borderColor: '#ccc',
     minWidth: 360,
-    maxWidth: SCREEN_WIDTH - 40,
+    maxWidth: SCREEN_WIDTH - 16,
 
     // elevation / shadow
     elevation: 6,

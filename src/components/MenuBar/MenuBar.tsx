@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { PaletteIcon } from '../PaletteIcon/PaletteIcon';
+import { PaletteIcon } from '../Icons/PaletteIcon';
 import { TextAlignType } from '../../types';
+import { RulerIcon } from '../Icons/RulerIcon';
 
 interface TopRightCornerCrossProps {
   onFontPress: () => void;
@@ -19,8 +20,10 @@ interface TopRightCornerCrossProps {
   setIsItalic: (v: boolean) => void;
   setIsUnderline: (v: boolean) => void;
   setIsStrikeThrough: (v: boolean) => void;
-  isFontFamilyOpen: boolean;
-  setIsFontFamilyOpen: (v: boolean) => void;
+  isFontOptionsOpen: boolean;
+  setIsFontOptionsOpen: (v: boolean) => void;
+  isRulerOptionsOpen: boolean;
+  setIsRulerOptionsOpen: (v: boolean) => void;
   isColorBoxOpen: boolean;
   setIsColorBoxOpen: (v: boolean) => void;
   isBackgroundColorBoxOpen: boolean;
@@ -43,8 +46,10 @@ export const MenuBar = (props: TopRightCornerCrossProps) => {
     setIsItalic,
     setIsUnderline,
     setIsStrikeThrough,
-    isFontFamilyOpen,
-    setIsFontFamilyOpen,
+    isFontOptionsOpen,
+    setIsFontOptionsOpen,
+    isRulerOptionsOpen,
+    setIsRulerOptionsOpen,
     isColorBoxOpen,
     setIsColorBoxOpen,
     isBackgroundColorBoxOpen,
@@ -82,20 +87,25 @@ export const MenuBar = (props: TopRightCornerCrossProps) => {
     </TouchableOpacity>
   );
 
-  const handleFontPress = () => {
-    setIsFontFamilyOpen(!isFontFamilyOpen);
+  const closeColorBoxes = () => {
     setIsColorBoxOpen(false);
     setIsBackgroundColorBoxOpen(false);
   };
+
+  const handleFontPress = () => {
+    setIsFontOptionsOpen(!isFontOptionsOpen);
+    setIsRulerOptionsOpen(false);
+    closeColorBoxes();
+  };
   const handleColorBoxPress = () => {
     setIsColorBoxOpen(!isColorBoxOpen);
-    setIsFontFamilyOpen(false);
+    setIsFontOptionsOpen(false);
     setIsBackgroundColorBoxOpen(false);
   };
   const handleBackgroundColorBoxPress = () => {
     setIsBackgroundColorBoxOpen(!isBackgroundColorBoxOpen);
     setIsColorBoxOpen(false);
-    setIsFontFamilyOpen(false);
+    setIsFontOptionsOpen(false);
   };
   const onBoldPress = () => {
     setIsBold(!isBold);
@@ -109,13 +119,18 @@ export const MenuBar = (props: TopRightCornerCrossProps) => {
   const onStrikeThroughPress = () => {
     setIsStrikeThrough(!isStrikeThrough);
   };
+  const handleRulerPress = () => {
+    setIsRulerOptionsOpen(!isRulerOptionsOpen);
+    setIsFontOptionsOpen(false);
+    closeColorBoxes();
+  };
 
   return (
     <View style={styles.container}>
       <TouchableOpacity
         hitSlop={12}
         onPress={handleFontPress}
-        style={[styles.button, isFontFamilyOpen && styles.selected]}
+        style={[styles.button, isFontOptionsOpen && styles.selected]}
       >
         <Text style={styles.buttonText}>Aa</Text>
       </TouchableOpacity>
@@ -158,7 +173,7 @@ export const MenuBar = (props: TopRightCornerCrossProps) => {
       <TouchableOpacity
         hitSlop={12}
         onPress={onFontPress}
-        style={styles.button}
+        style={[styles.button, { marginHorizontal: 1 }]}
       >
         {align === 'left' ? (
           <AlignLeft />
@@ -178,13 +193,20 @@ export const MenuBar = (props: TopRightCornerCrossProps) => {
       >
         <Text style={[styles.buttonText, { color, backgroundColor }]}>A</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        hitSlop={12}
+        onPress={handleRulerPress}
+        style={[styles.button, isRulerOptionsOpen && styles.selected]}
+      >
+        <RulerIcon />
+      </TouchableOpacity>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 4,
+    // paddingHorizontal: 4,
     backgroundColor: '#f8f8f8',
     height: 40,
     borderTopWidth: StyleSheet.hairlineWidth,
@@ -198,6 +220,7 @@ const styles = StyleSheet.create({
     width: 36,
     justifyContent: 'center',
     alignItems: 'center',
+    marginHorizontal: 2,
   },
   bar: {
     position: 'absolute',

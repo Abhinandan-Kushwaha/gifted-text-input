@@ -12,3 +12,10 @@ export type GiftedTextInputAction =
   | { type: 'TOGGLE_UNDERLINE' }
   | { type: 'TOGGLE_STRIKE' }
   | { type: 'SET_IS_FORMATTING_BOX_VISIBLE', payload: boolean }
+  | { type: 'SET_PADDING_HORIZONTAL'; payload: number }
+  | { type: 'SET_PADDING_VERTICAL'; payload: number }
+  | { type: 'SET_BORDER_RADIUS'; payload: number }
+  | { type: 'SET_IS_FONT_OPTIONS_OPEN', payload: boolean }
+  | { type: 'SET_IS_COLOR_BOX_OPEN', payload: boolean }
+  | { type: 'SET_IS_BACKGROUND_COLOR_BOX_OPEN', payload: boolean }
+  | { type: 'SET_IS_RULER_OPTIONS_OPEN', payload: boolean }

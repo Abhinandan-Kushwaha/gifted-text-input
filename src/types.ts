@@ -55,6 +55,11 @@ export interface IGiftedTextInputProps {
   borderBottomRightRadius?: number;
   placeholder?: string;
   placeholderTextColor?: string;
+
+  isFontOptionsOpen?: boolean;
+  isColorBoxOpen?: boolean;
+  isBackgroundColorBoxOpen?: boolean;
+  isRulerOptionsOpen?: boolean;
 }
 
 export interface IGiftedTextInputRendererProps {
@@ -76,6 +81,10 @@ export interface IGiftedTextInputRendererProps {
   isItalic: boolean;
   isUnderline: boolean;
   isStrikeThrough: boolean;
+
+  paddingHorizontal: number;
+  paddingVertical: number;
+  borderRadius: number;
 
   paddingLeft: number;
   paddingRight: number;
@@ -117,4 +126,11 @@ export interface IGiftedTextInputRendererProps {
   setIsUnderline: () => void;
   setIsStrikeThrough: () => void;
   onChangeText?: (val: string) => void;
+  setPaddingHorizontal: (p: number) => void;
+  setPaddingVertical: (p: number) => void;
+  setBorderRadius: (r: number) => void;
+  setIsFontOptionsOpen: (v: boolean) => void;
+  setIsColorBoxOpen: (v: boolean) => void;
+  setIsBackgroundColorBoxOpen: (v: boolean) => void;
+  setIsRulerOptionsOpen: (v: boolean) => void;
 }

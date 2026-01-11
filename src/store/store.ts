@@ -13,6 +13,21 @@ export type GiftedTextInputState = {
   isItalic: boolean;
   isUnderline: boolean;
   isStrikeThrough: boolean;
+  paddingHorizontal: number;
+  paddingVertical: number;
+  paddingTop: number;
+  paddingBottom: number;
+  paddingLeft: number;
+  paddingRight: number;
+  borderRadius: number;
+  borderTopLeftRadius: number;
+  borderTopRightRadius: number;
+  borderBottomLeftRadius: number;
+  borderBottomRightRadius: number;
+  isFontOptionsOpen: boolean;
+  isColorBoxOpen: boolean;
+  isBackgroundColorBoxOpen: boolean;
+  isRulerOptionsOpen: boolean;
 };
 
 export const giftedTextInputReducer = (
@@ -49,6 +64,41 @@ export const giftedTextInputReducer = (
 
     case 'TOGGLE_STRIKE':
       return { ...state, isStrikeThrough: !state.isStrikeThrough };
+
+    case 'SET_PADDING_HORIZONTAL':
+      return {
+        ...state,
+        paddingHorizontal: action.payload,
+        paddingLeft: action.payload,
+        paddingRight: action.payload,
+      };
+    case 'SET_PADDING_VERTICAL':
+      return {
+        ...state,
+        paddingVertical: action.payload,
+        paddingTop: action.payload,
+        paddingBottom: action.payload,
+      };
+    case 'SET_BORDER_RADIUS':
+      return {
+        ...state,
+        borderRadius: action.payload,
+        borderTopLeftRadius: action.payload,
+        borderTopRightRadius: action.payload,
+        borderBottomLeftRadius: action.payload,
+        borderBottomRightRadius: action.payload,
+      };
+    case 'SET_IS_FONT_OPTIONS_OPEN':
+      return { ...state, isFontOptionsOpen: action.payload };
+
+    case 'SET_IS_COLOR_BOX_OPEN':
+      return { ...state, isColorBoxOpen: action.payload };
+
+    case 'SET_IS_BACKGROUND_COLOR_BOX_OPEN':
+      return { ...state, isBackgroundColorBoxOpen: action.payload };
+
+    case 'SET_IS_RULER_OPTIONS_OPEN':
+      return { ...state, isRulerOptionsOpen: action.payload };
 
     default:
       return state;

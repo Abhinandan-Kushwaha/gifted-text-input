@@ -1,6 +1,7 @@
 export const colorCodes = [
   // Row 0: Shades of gray
   [
+    'transparent',
     '#FFFFFF',
     '#DDDDDD',
     '#BBBBBB',
@@ -8,7 +9,6 @@ export const colorCodes = [
     '#777777',
     '#555555',
     '#333333',
-    '#151515',
     '#000000',
   ],
   // Row 1 (V: ≈15% - Dark Tones)
