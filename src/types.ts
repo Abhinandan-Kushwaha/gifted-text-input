@@ -109,6 +109,11 @@ export interface IGiftedTextInputRendererProps {
   placeholder: string;
   placeholderTextColor: string;
   autoFocus: boolean;
+  
+  isFontOptionsOpen: boolean;
+  isColorBoxOpen: boolean;
+  isBackgroundColorBoxOpen: boolean;
+  isRulerOptionsOpen: boolean;
 
   /** handlers */
   onLongPress?: () => void;
