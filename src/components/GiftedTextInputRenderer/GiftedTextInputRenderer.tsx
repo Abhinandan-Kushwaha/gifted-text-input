@@ -9,6 +9,7 @@ export const GiftedTextInputRenderer = (
 ) => {
   const {
     textInputRef,
+    editable = true,
     text,
     setText,
     color,
@@ -56,6 +57,7 @@ export const GiftedTextInputRenderer = (
     <View>
       <TextInput
         ref={textInputRef}
+        editable={editable}
         value={text}
         autoFocus={autoFocus}
         multiline
@@ -68,7 +70,7 @@ export const GiftedTextInputRenderer = (
       />
       <View
         onTouchStart={() => {
-          if (!onLongPress) return;
+          if (!editable || !onLongPress) return;
           pressedRef.current = true;
 
           longPressTimer.current = setTimeout(() => {
@@ -78,14 +80,14 @@ export const GiftedTextInputRenderer = (
           }, LONG_PRESS_MS);
         }}
         onTouchEnd={() => {
-          if (!onLongPress) return;
+          if (!editable || !onLongPress) return;
           pressedRef.current = false;
           if (longPressTimer.current) {
             clearTimeout(longPressTimer.current);
           }
         }}
         onTouchCancel={() => {
-          if (!onLongPress) return;
+          if (!editable || !onLongPress) return;
           // OnePlus often fires this incorrectly
           // DO NOT assume finger lifted
           pressedRef.current = false;
@@ -98,7 +100,7 @@ export const GiftedTextInputRenderer = (
           onPress={() => {
             textInputRef.current?.focus();
           }}
-          onLongPress={onLongPress}
+          // onLongPress={onLongPress}
           style={{
             backgroundColor,
             position: 'absolute',

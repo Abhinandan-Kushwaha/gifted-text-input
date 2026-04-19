@@ -17,6 +17,7 @@ export type TextAlignType =
 
 export interface IGiftedTextInputProps {
   ref?: RefObject<TextInput | null>;
+  editable?: boolean;
   value?: string;
   onChangeText?: (v: string) => void;
   onLongPress?: () => void;
@@ -65,6 +66,7 @@ export interface IGiftedTextInputProps {
 export interface IGiftedTextInputRendererProps {
   /** reducer state */
   state: GiftedTextInputState;
+  editable?: boolean
 
   /** refs */
   textInputRef: React.RefObject<TextInput | null>;
