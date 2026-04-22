@@ -21,6 +21,7 @@ export interface IGiftedTextInputProps {
   value?: string;
   onChangeText?: (v: string) => void;
   onLongPress?: () => void;
+  onFocus?: () => void;
   onBlur?: () => void;
   autoFocus?: boolean;
   fontSize?: number;
@@ -120,6 +121,7 @@ export interface IGiftedTextInputRendererProps {
   /** handlers */
   onLongPress?: () => void;
   onBlur?: () => void;
+  onFocus?: () => void;
 
   /** actions */
   setText: (val: string) => void;

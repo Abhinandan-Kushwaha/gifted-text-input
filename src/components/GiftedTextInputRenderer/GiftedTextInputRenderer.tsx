@@ -41,6 +41,7 @@ export const GiftedTextInputRenderer = (
     placeholderTextColor,
     autoFocus,
     onLongPress,
+    onFocus,
     onBlur,
   } = props;
 
@@ -60,6 +61,7 @@ export const GiftedTextInputRenderer = (
         editable={editable}
         value={text}
         autoFocus={autoFocus}
+        onFocus={onFocus}
         multiline
         onChangeText={handleChangeText}
         onBlur={onBlur}
